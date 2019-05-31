@@ -9,7 +9,7 @@ public class Knight {
     private int age;
     private Quest quest; //klasa podrzędna
 
-    //wstzrykiwanie poprzez konstruktor
+    //wstrzykiwanie poprzez konstruktor
     public Knight(String name, int age, Quest quest) {
         this.name = name;
         this.age = age;
@@ -28,6 +28,6 @@ public class Knight {
 
     @Override
     public String toString() {
-        return "Rycerz o imieniu " + name + " (" + age + "). Zadanie : " + quest;
+        return "Rycerz o imieniu " + this.name + " (" + this.age + "). Zadanie : " + this.quest;
     }
 }

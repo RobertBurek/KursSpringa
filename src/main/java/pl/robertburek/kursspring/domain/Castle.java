@@ -11,6 +11,7 @@ import javax.annotation.PreDestroy;
 
 @Component  // spring bean
 public class Castle {
+
     private String name = "East Watch";
 
     public Castle() {
@@ -28,5 +29,10 @@ public class Castle {
     //nazwa metody  nie ma znaczenia
     public void tearDown() {
         System.out.println("Zaraz wyburzymy zamek " + name);
+    }
+
+    @Override
+    public String toString() {
+        return "Znajduje się tu zamek o nazwie " + this.name;
     }
 }
