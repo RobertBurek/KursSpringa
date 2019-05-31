@@ -22,16 +22,5 @@ public class Starter implements CommandLineRunner {
 
         System.out.println(castle);
 
-        //wstrzykiwanie poprzez konstruktor
-        Quest saveThePrincess = new Quest("Uratuj księżniczkę!!!");
-        Knight lancelot = new Knight("Lancelot", 29, saveThePrincess);
-        System.out.println(lancelot);
-
-        //wstrzykiwanie poprze metodę
-        Quest killTheDragon = new Quest("Zabij smoka!");
-        Knight percival = new Knight("Percival", 31);
-        System.out.println(percival);
-        percival.setQuest(killTheDragon);
-        System.out.println(percival);
     }
 }

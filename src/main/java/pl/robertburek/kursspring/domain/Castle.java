@@ -1,5 +1,9 @@
 package pl.robertburek.kursspring.domain;
 
+import jdk.nashorn.internal.objects.annotations.Property;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -10,12 +14,18 @@ import javax.annotation.PreDestroy;
  */
 
 @Component  // spring bean
+@PropertySource("classpath:castle.properties")
 public class Castle {
 
-    private String name = "East Watch";
+    @Autowired
+    Knight knight;
+
+    @Value("${my.castle.name:EastCastle}")
+    private String name;
 
     public Castle() {
     }
+
 
     @PostConstruct //metoda zostanie wykonana gdy spring bedzie tworzony
     //w momencie tworzenia kontenera, wszystkie metody tak oznaczone będą wykonane
@@ -33,6 +43,6 @@ public class Castle {
 
     @Override
     public String toString() {
-        return "Znajduje się tu zamek o nazwie " + this.name;
+        return "Znajduje się tu zamek o nazwie " + this.name + ". Zamieszkuje go " + knight;
     }
 }
