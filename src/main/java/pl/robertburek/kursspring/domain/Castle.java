@@ -17,13 +17,15 @@ import javax.annotation.PreDestroy;
 @PropertySource("classpath:castle.properties")
 public class Castle {
 
-    @Autowired
+//    @Autowired  wstrzykiwanie bezpośrednio do pola poprzez Reflaction API - trzecia metoda
     Knight knight;
 
     @Value("${my.castle.name:EastCastle}")
     private String name;
 
-    public Castle() {
+    @Autowired  // wstrzykiwanie do metody - konstruktora
+    public Castle(Knight knight) {
+        this.knight = knight;
     }
 
 

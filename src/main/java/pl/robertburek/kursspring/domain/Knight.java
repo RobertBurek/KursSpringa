@@ -1,5 +1,6 @@
 package pl.robertburek.kursspring.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,8 @@ public class Knight {
     private String name = "Zbyszko";
 //    @Value("35")    takie wykorzystanie @Value jest niespotykane
     private int age = 35;
-//    private Quest quest; //klasa podrzędna
+
+    private Quest quest; //klasa podrzędna
 
     public Knight() {
     }
@@ -28,9 +30,11 @@ public class Knight {
 //    }
 
     //wstrzykiwanie poprzez metodę
-//    public void setQuest(Quest quest) {
-//        this.quest = quest;
-//    }
+    @Autowired
+    public void setQuest(Quest quest) {
+        System.out.println("Ustawiam zadanie dla rycerza.");
+        this.quest = quest;
+    }
 
     public Knight(String name, int age) {
         this.name = name;
@@ -39,6 +43,6 @@ public class Knight {
 
     @Override
     public String toString() {
-        return "Rycerz o imieniu " + this.name + " (" + this.age + ")";//. Zadanie : " + this.quest;
+        return "Rycerz o imieniu " + this.name + " (" + this.age + "). Ma za zadanie : " + this.quest;
     }
 }
