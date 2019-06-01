@@ -28,6 +28,10 @@ public class Castle {
         this.knight = knight;
     }
 
+    Castle(Knight knight, String name) {
+        this.knight = knight;
+        this.name = name;
+    }
 
     @PostConstruct //metoda zostanie wykonana gdy spring bedzie tworzony
     //w momencie tworzenia kontenera, wszystkie metody tak oznaczone będą wykonane

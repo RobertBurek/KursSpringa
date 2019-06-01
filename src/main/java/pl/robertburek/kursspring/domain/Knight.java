@@ -43,6 +43,6 @@ public class Knight {
 
     @Override
     public String toString() {
-        return "Rycerz o imieniu " + this.name + " (" + this.age + "). Ma za zadanie : " + this.quest;
+        return "Rycerz o imieniu " + this.name + "(" + this.age + "). Ma za zadanie : " + this.quest;
     }
 }
