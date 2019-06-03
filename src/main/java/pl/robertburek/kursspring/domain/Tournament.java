@@ -1,8 +1,10 @@
 package pl.robertburek.kursspring.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Robert Burek
@@ -12,25 +14,30 @@ import org.springframework.stereotype.Component;
 public class Tournament {
 
     @Autowired
-    @Qualifier(value ="grzegorz") // ze wzgklędu że tu jest pole
-    Knight knight;
+    List<Knight> knights;
+//    Map<String, Knight> knights;
 
     public Tournament() {
     }
 
-    public void duel() {
-        knight.setAge(knight.getAge() + 2);
-    }
+//    public void duel() {
+//        knight.setAge(knight.getAge() + 2);
+//    }
 
     public String toString() {
-        return "W turnieju bierze udział " + this.knight;
+        return "W turnieju bierą udział " + knights.stream().map(Object::toString).collect(Collectors.joining(","));
     }
 
     public String getKnight() {
-        return knight.getName() + "(" + knight.getAge() + ")";
+//        return knight.getName() + "(" + knight.getAge() + ")";
+        return knights.stream().map(Object::toString).collect(Collectors.joining(","));
     }
 
-    public void setKnight(Knight knight) {
-        this.knight = knight;
+    public void setKnight(List<Knight> knights) {
+        this.knights = knights;
     }
+
+//    public void setKnight(Map<String, Knight> knights) {
+//        this.knights = knights;
+//    }
 }

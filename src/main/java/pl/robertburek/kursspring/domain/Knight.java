@@ -2,6 +2,8 @@ package pl.robertburek.kursspring.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Objects;
+
 /**
  * Created by Robert Burek
  */
@@ -41,5 +43,18 @@ public class Knight {
 
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Knight knight = (Knight) o;
+        return age == knight.age;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(age);
     }
 }

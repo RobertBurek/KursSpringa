@@ -19,7 +19,23 @@
     </bean>
 
     <bean id="tournament" class="pl.robertburek.kursspring.domain.Tournament">
-        <property name="knight" ref="grzegorz"/>
+        <property name="knights">
+            <map>
+                <entry key="robert" value-ref="robert"></entry>
+                <entry key="grzegorz" value-ref="grzegorz"></entry>
+                <entry key="miroslaw" value-ref="miroslaw"></entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="tournament" class="pl.robertburek.kursspring.domain.Tournament">
+        <property name="knights">
+            <list>
+                <ref bean="robert"></ref>
+                <ref bean="grzegorz"></ref>
+                <ref bean="miroslaw"></ref>
+            </list>
+        </property>
     </bean>
 
 
