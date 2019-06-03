@@ -1,9 +1,12 @@
 package pl.robertburek.kursspring.domain;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by Robert Burek
  */
 
+@Component
 public class Quest {
 
     private String description;

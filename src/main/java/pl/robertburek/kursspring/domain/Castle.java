@@ -1,14 +1,23 @@
 package pl.robertburek.kursspring.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 /**
  * Created by Robert Burek
  */
 
+@Component
 public class Castle {
 
+
     Knight knight;
+
+    @Value("${my.castle.name:Default Castle}")
     private String name;
 
+    @Autowired
     public Castle(Knight knight) {
         this.knight = knight;
     }
