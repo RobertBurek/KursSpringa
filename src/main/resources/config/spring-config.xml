@@ -8,9 +8,9 @@
        http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="pl.robertburek"/>
-    <context:property-placeholder location="classpath:castle.properties"/>
+    <context:property-placeholder location="classpath:knightRepository.properties"/>
 
-    <import resource="classpath:config/castle-config.xml"/>
+    <import resource="classpath:config/knightRepository-config.xml"/>
 
     <bean id="quest" class="pl.robertburek.kursspring.domain.Quest" scope="prototype">
         <constructor-arg index="0" value="Uratuj wybraną KSIĘŻNICZKĘ"/>

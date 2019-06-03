@@ -2,39 +2,39 @@ package pl.robertburek.kursspring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
-import pl.robertburek.kursspring.domain.Castle;
-import pl.robertburek.kursspring.domain.Tournament;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+import pl.robertburek.kursspring.domain.repository.KnightRepository;
+import pl.robertburek.kursspring.domain.repository.QuestRepository;
+import pl.robertburek.kursspring.services.QuestService;
+
 
 /**
  * Created by Robert Burek
  */
 
-@Component
-//@Scope("singleton") domyslnie jest singleton
+@Service
+@Scope("singleton")
 public class Starter implements CommandLineRunner {
 
     @Autowired
-    Castle castle;
+    KnightRepository knightRepository;
 
     @Autowired
-    Tournament tournament;
+    QuestRepository questRepository;
 
-    public void setCastle(Castle castle) {
-        this.castle = castle;
-    }
+    @Autowired
+    QuestService questService;
+
 
     @Override
     public void run(String... args) throws Exception {
+        System.out.println(questRepository);
+        questService.assignRandomQuest("Robert");
+        questService.assignRandomQuest("Grzegorz");
+        questService.assignRandomQuest("Zbyszko");
+        System.out.println(knightRepository);
 
-        System.out.println(castle);
-        System.out.println(tournament);
-//        tournament.duel();
-        System.out.println("Jest już po turnieju!!!");
-        System.out.println("Wygrał rycerz : " + tournament.getKnight());
-
-        System.out.println("Stan zamku po turnieju : ");
-        System.out.println(castle);
 
     }
 }

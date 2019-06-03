@@ -1,4 +1,4 @@
-package pl.robertburek.kursspring;
+package pl.robertburek.kursspring.singletony;
 
 /**
  * Created by Robert Burek
