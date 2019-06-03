@@ -1,5 +1,6 @@
 package pl.robertburek.kursspring.domain;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Scope("prototype")
 public class Quest {
 
     private String description;

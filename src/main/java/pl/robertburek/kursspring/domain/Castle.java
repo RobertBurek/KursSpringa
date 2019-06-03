@@ -1,6 +1,7 @@
 package pl.robertburek.kursspring.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,11 @@ public class Castle {
     @Value("${my.castle.name:Default Castle}")
     private String name;
 
-    @Autowired
+    @Autowired   //tu jest konstruktor zatem @Qualifier(value="") stawiamy przy obiekcie Knight
+//    public Castle(@Qualifier(value = "robert") Knight knight) {
+//        this.knight = knight;
+//    }
+    //mamy ustawiony @Primary knight na "robert"
     public Castle(Knight knight) {
         this.knight = knight;
     }

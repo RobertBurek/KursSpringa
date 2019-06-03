@@ -12,13 +12,19 @@
 
     <import resource="classpath:config/castle-config.xml"/>
 
-    <bean id="quest" class="pl.robertburek.kursspring.domain.Quest">
+    <bean id="quest" class="pl.robertburek.kursspring.domain.Quest" scope="prototype">
         <constructor-arg index="0" value="Uratuj wybraną KSIĘŻNICZKĘ"/>
     </bean>
 
-    <bean id="knight" class="pl.robertburek.kursspring.domain.Knight" scope="prototype">
-        <constructor-arg index="0" value="Zbyszko Wielki"/>
-        <constructor-arg index="1" value="39"/>
+    <bean id="robert" class="pl.robertburek.kursspring.domain.Knight" primary="true" scope="prototype">
+        <constructor-arg index="0" value="robert"/>
+        <constructor-arg index="1" value="45"/>
+        <property name="quest" ref="quest"/>
+    </bean>
+
+    <bean id="grzegorz" class="pl.robertburek.kursspring.domain.Knight" scope="prototype">
+        <constructor-arg index="0" value="Grzegorz"/>
+        <constructor-arg index="1" value="44"/>
         <property name="quest" ref="quest"/>
     </bean>
 

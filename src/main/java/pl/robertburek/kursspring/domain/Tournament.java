@@ -1,6 +1,7 @@
 package pl.robertburek.kursspring.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class Tournament {
 
     @Autowired
+    @Qualifier(value ="grzegorz") // ze wzgklędu że tu jest pole
     Knight knight;
 
     public Tournament() {
@@ -26,5 +28,9 @@ public class Tournament {
 
     public String getKnight() {
         return knight.getName() + "(" + knight.getAge() + ")";
+    }
+
+    public void setKnight(Knight knight) {
+        this.knight = knight;
     }
 }

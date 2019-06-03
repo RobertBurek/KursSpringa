@@ -1,6 +1,12 @@
 package pl.robertburek.kursspring.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
+import pl.robertburek.kursspring.domain.Knight;
+import pl.robertburek.kursspring.domain.Quest;
 
 /**
  * Created by Robert Burek
@@ -8,15 +14,22 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MainConfig {
 
-    // w klasie konfiguracyjnej też dodajemy adnotację @Scope("prototype")
-    // natomias w xml dodjamy do taga bean atrybut scope="prototype"
+    @Autowired
+    Quest quest;
 
-//    @Bean
-//    @Scope("prototype")
-//    public Knight knight(){
-//        Knight knight = new Knight("Robert",45);
-//        knight.setQuest(quest);
-//        return knight;
-//    }
+    @Bean(name="robert")
+    @Primary  //ustawiony jako domyślny
+    public Knight robert(){
+        Knight robert = new Knight("Robert",45);
+        robert.setQuest(quest);
+        return robert;
+    }
+
+    @Bean(name = "grzegorz")
+    public Knight createKnight(){
+        Knight grzegorz = new Knight("Grzegorz",44);
+        grzegorz.setQuest(quest);
+        return grzegorz;
+    }
 
 }

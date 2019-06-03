@@ -1,16 +1,11 @@
 package pl.robertburek.kursspring.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by Robert Burek
  */
 
-@Component
-@Scope("prototype") //za każdym razem jest wstrzykiwana nowa instancja klasy "nowy,inny rycerz"
-//wynika to ze zmiany zakresu beana knight na prototype
 public class Knight {
 
     private String name = "Wołodejowski";

@@ -10,12 +10,16 @@
     <context:property-placeholder location="classpath:castle.properties"/>
 
     <bean id="zamek" class="pl.robertburek.kursspring.domain.Castle" init-method="build" destroy-method="tearDown">
-        <constructor-arg index="0" ref="knight"/>
+        <constructor-arg index="0" ref="robert"/>
         <property name="name" value="${my.castle.name:Default Castle}"/>
     </bean>
 
     <bean id="starter" class="pl.robertburek.kursspring.Starter">
         <property name="castle" ref="zamek"/>
+    </bean>
+
+    <bean id="tournament" class="pl.robertburek.kursspring.domain.Tournament">
+        <property name="knight" ref="grzegorz"/>
     </bean>
 
 
