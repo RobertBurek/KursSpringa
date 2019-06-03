@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans profile="dev"
+       xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -9,7 +10,8 @@
 
     <context:property-placeholder location="classpath:knightRepository.properties"/>
 
-    <bean id="zamek" class="pl.robertburek.kursspring.domain.repository.KnightRepository" init-method="build" destroy-method="tearDown">
+    <bean id="zamek" class="pl.robertburek.kursspring.domain.repository.InMemoryKnightRepository" init-method="build"
+          destroy-method="tearDown">
         <constructor-arg index="0" ref="robert"/>
         <property name="name" value="${my.knightRepository.name:Default Castle}"/>
     </bean>
@@ -36,6 +38,10 @@
                 <ref bean="miroslaw"></ref>
             </list>
         </property>
+    </bean>
+
+    <bean id="knightRepository" class="pl.robertburek.kursspring.domain.repository.InMemoryKnightRepository"
+          init-method="build">
     </bean>
 
 

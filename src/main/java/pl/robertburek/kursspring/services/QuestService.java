@@ -1,8 +1,10 @@
 package pl.robertburek.kursspring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import pl.robertburek.kursspring.domain.Quest;
+import pl.robertburek.kursspring.domain.repository.InMemoryKnightRepository;
 import pl.robertburek.kursspring.domain.repository.KnightRepository;
 import pl.robertburek.kursspring.domain.repository.QuestRepository;
 
@@ -17,6 +19,7 @@ import java.util.Random;
 public class QuestService {
 
     @Autowired
+//    @Qualifier("inMemoryKnightRepository")
     KnightRepository knightRepository;
 
     @Autowired

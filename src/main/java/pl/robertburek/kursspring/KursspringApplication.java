@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@PropertySource("classpath:knightRepository.properties")
+@PropertySource("classpath:inMemoryKnightRepository.properties")
 @EnableScheduling //zainicjowanie task screnera, kontrola - jaka i kiedy ma się wykonać jakaś metoda @Scheduled(fixed..)
 public class KursspringApplication {
 

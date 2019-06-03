@@ -1,10 +1,11 @@
 package pl.robertburek.kursspring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Scope;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import pl.robertburek.kursspring.domain.repository.InMemoryKnightRepository;
 import pl.robertburek.kursspring.domain.repository.KnightRepository;
 import pl.robertburek.kursspring.domain.repository.QuestRepository;
 import pl.robertburek.kursspring.services.QuestService;
@@ -20,6 +21,7 @@ import pl.robertburek.kursspring.services.QuestService;
 public class Starter implements CommandLineRunner {
 
     @Autowired
+//    @Qualifier("inDBKnightRepository") przenosimy do profilii @Profile
     KnightRepository knightRepository;
 
     @Autowired
@@ -32,6 +34,7 @@ public class Starter implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println(questRepository);
+        System.out.println(knightRepository);
 
 
         questRepository.createRandomQuest();

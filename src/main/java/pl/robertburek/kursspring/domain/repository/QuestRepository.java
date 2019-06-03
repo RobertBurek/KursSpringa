@@ -45,11 +45,11 @@ public class QuestRepository {
                 '}';
     }
 
-//    @Scheduled(fixedDelay = 1000) //czeka na zakończenie metody i wtedy robi jeszcze raz
+    //    @Scheduled(fixedDelay = 1000) //czeka na zakończenie metody i wtedy robi jeszcze raz
 //    @Scheduled(fixedDelayString ="${questCreationDelay}", initialDelay = 3000) //czeka 3s i dopiero wykonuje
     // się pierwszy raz
 //    @Scheduled(fixedRate = 1000)  //wykonuje co 1s nie czekając na zakończenie metody
-    @Scheduled(fixedDelayString ="${questCreationDelay}", initialDelayString = "${questPauseDelay}")
+    @Scheduled(fixedDelayString = "${questCreationDelay}", initialDelayString = "${questPauseDelay}")
     public void createRandomQuest() {
         List<String> descriptions = new ArrayList<>();
 
