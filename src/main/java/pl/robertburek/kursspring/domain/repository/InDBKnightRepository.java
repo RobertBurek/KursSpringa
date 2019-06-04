@@ -56,5 +56,10 @@ public class InDBKnightRepository implements KnightRepository {
         System.out.println("używam bazy danych");
     }
 
+    @Override
+    public void createKnight(Knight knight) {
+        System.out.println("używam bazy danych");
+    }
+
 
 }

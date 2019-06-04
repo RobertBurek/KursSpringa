@@ -22,4 +22,6 @@ public interface KnightRepository {
     void tearDown();
 
     void setName(String name);
+
+    void createKnight(Knight knight);
 }

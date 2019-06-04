@@ -8,8 +8,8 @@ import java.util.Objects;
 
 public class Knight {
 
-    private String name = "Wołodejowski";
-    private int age = 31;
+    private String name;
+    private int age;
     private Quest quest;
 
     public Knight() {
@@ -18,6 +18,10 @@ public class Knight {
     public Knight(String name, int age) {
         this.name = name;
         this.age = age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAge() {

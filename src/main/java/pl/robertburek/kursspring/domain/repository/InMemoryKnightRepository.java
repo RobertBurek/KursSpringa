@@ -71,6 +71,11 @@ public class InMemoryKnightRepository implements KnightRepository {
     }
 
     @Override
+    public void createKnight(Knight knight) {
+        knights.put(knight.getName(),knight);
+    }
+
+    @Override
     public String toString() {
         return "Lista rycerzy {" +
                 "rycerz = " + knights +

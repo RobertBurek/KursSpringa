@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dodanie rycerza</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <p th:text="${powitanie}"/>
+    <h1>Tworzymy nowego rycerza</h1>
+
+<form class="form-horizontal" th:object="${knight}" th:action="@{/knights}" th:method="post">
+    <div class="form-group">
+        <label class="control-label">Imie:</label>
+        <input type="text" class="form-control" th:field="*{name}"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Wiek:</label>
+        <input type="number" class="form-control" th:field="*{age}"/>
+    </div>
+    <div class="row">
+        <button type="submit" class="btn btn-default">Utwórz rycerza</button>
+    </div>
+</form>
+
+</div>
+</body>
+</html>
