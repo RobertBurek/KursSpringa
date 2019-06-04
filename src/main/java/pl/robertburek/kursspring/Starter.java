@@ -33,8 +33,8 @@ public class Starter implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println(questRepository);
-        System.out.println(knightRepository);
+//        System.out.println(questRepository);
+//        System.out.println(knightRepository);
 
 
         questRepository.createRandomQuest();
