@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HelloController {
 
-    @RequestMapping("/hello")
-    public String hello(){
+    @RequestMapping("/hello") //nazwa widoku a widok był domyślny
+    public String hello() {
         return "helloworld.html";
         // localhost8080/hello wyświetli plik helloworld.html, który jest w resources/static
     }

@@ -8,6 +8,7 @@ import java.util.Collection;
  * Created by Robert Burek
  */
 public interface KnightRepository {
+
     void createKnight(String name, int age);
 
     Collection<Knight> getAllKnights();
