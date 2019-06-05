@@ -44,14 +44,11 @@ public class InMemoryKnightRepository implements KnightRepository {
         if (knights.isEmpty()) {
             return 0;
         } else {
-//            Integer newId = knights.keySet().stream().max((o1, o2) -> {
-//                if (o1>=02) o2=01;
-//                return o2;
-//            }).get();
-            Integer integer = knights.size() - 1;//knights.keySet().stream().max(Integer::max).get();
-            return integer + 1;
+            Integer newId = knights.size() - 1;//knights.keySet().stream().max(Integer::max).get();
+            return newId + 1;
         }
     }
+
 
     @Override
     public Collection<Knight> getAllKnights() {
@@ -69,6 +66,7 @@ public class InMemoryKnightRepository implements KnightRepository {
 
     @Override
     public void deleteKnight(Integer id) {
+        System.out.println("Usuwam rycerza id= " + id);
         knights.remove(id);
     }
 
@@ -95,7 +93,7 @@ public class InMemoryKnightRepository implements KnightRepository {
     @Override
     public void createKnight(Knight knight) {
         knight.setId(getNewId());
-        knight.setLevel(2);
+        knight.setLevel(0);
         knights.put(knight.getId(), knight);
     }
 

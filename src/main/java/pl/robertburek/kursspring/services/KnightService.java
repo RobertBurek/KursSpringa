@@ -31,4 +31,8 @@ public class KnightService {
     public Knight getKnight(Integer id) {
         return knightRepository.getKnightById(id);
     }
+
+    public void removeKnight(Integer id) {
+        knightRepository.deleteKnight(id);
+    }
 }
