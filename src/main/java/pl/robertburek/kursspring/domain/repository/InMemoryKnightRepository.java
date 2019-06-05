@@ -9,6 +9,7 @@ import javax.annotation.PreDestroy;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by Robert Burek
@@ -22,7 +23,7 @@ public class InMemoryKnightRepository implements KnightRepository {
     @Value("${my.castle.name:Default Castle}")
     private String name;
 
-    Map<String, Knight> knights = new HashMap<String, Knight>();
+    Map<Integer, Knight> knights = new HashMap<>();
 
     public InMemoryKnightRepository() {
     }
@@ -33,7 +34,23 @@ public class InMemoryKnightRepository implements KnightRepository {
 
     @Override
     public void createKnight(String name, int age) {
-        knights.put(name, new Knight(name, age));
+        Knight newKnight = new Knight(name, age);
+        newKnight.setId(getNewId());
+        knights.put(getNewId(), newKnight);
+        System.out.println(newKnight);
+    }
+
+    private int getNewId() {
+        if (knights.isEmpty()) {
+            return 0;
+        } else {
+//            Integer newId = knights.keySet().stream().max((o1, o2) -> {
+//                if (o1>=02) o2=01;
+//                return o2;
+//            }).get();
+            Integer integer = knights.size() - 1;//knights.keySet().stream().max(Integer::max).get();
+            return integer + 1;
+        }
     }
 
     @Override
@@ -42,13 +59,17 @@ public class InMemoryKnightRepository implements KnightRepository {
     }
 
     @Override
-    public Knight getKnight(String name) {
-        return knights.get(name);
+    public Optional<Knight> getKnight(String name) {
+        Optional<Knight> knightByName = knights.values().stream()
+                .filter(knight -> knight.getName().equals(name)).findAny();
+        return knightByName;
+        // nie powinno się tak robić - returne knoghts.get(knightByName.orElseGet(null));
+        // powinno się zwrócić Optionala - zmiana w interfejsie i tak też zrobimy
     }
 
     @Override
-    public void deleteKnight(String name) {
-        knights.remove(name);
+    public void deleteKnight(Integer id) {
+        knights.remove(id);
     }
 
     @Override
@@ -57,6 +78,7 @@ public class InMemoryKnightRepository implements KnightRepository {
         createKnight("Robert", 49);
         createKnight("Grzegorz", 48);
         createKnight("Zbyszko", 52);
+        createKnight("Lancelot", 38);
     }
 
     @Override
@@ -72,7 +94,14 @@ public class InMemoryKnightRepository implements KnightRepository {
 
     @Override
     public void createKnight(Knight knight) {
-        knights.put(knight.getName(),knight);
+        knight.setId(getNewId());
+        knight.setLevel(2);
+        knights.put(knight.getId(), knight);
+    }
+
+    @Override
+    public Knight getKnightById(Integer id) {
+        return knights.get(id);
     }
 
     @Override

@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add knight</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
+
+    <script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h3 th:text="'Dane rycerza '+ ${knight.name}"></h3>
+    <p th:text="'Wiek: '+ ${knight.age}"></p>
+    <p th:text="'Level: '+ ${knight.level}"></p>
+    <p th:text="'Id: '+ ${knight.id}"></p>
+</div>
+</body>
+</html>

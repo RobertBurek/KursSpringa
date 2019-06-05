@@ -3,6 +3,7 @@ package pl.robertburek.kursspring.domain.repository;
 import pl.robertburek.kursspring.domain.Knight;
 
 import java.util.Collection;
+import java.util.Optional;
 
 
 /**
@@ -25,7 +26,7 @@ public class InDBKnightRepository implements KnightRepository {
     }
 
     @Override
-    public Knight getKnight(String name) {
+    public Optional<Knight> getKnight(String name) {
 //        return knights.get(name);
         System.out.println("używam bazy danych");
 //        throw new NotImplementedException();
@@ -33,8 +34,7 @@ public class InDBKnightRepository implements KnightRepository {
     }
 
     @Override
-    public void deleteKnight(String name) {
-//        knights.remove(name);
+    public void deleteKnight(Integer id) {
         System.out.println("używam bazy danych");
     }
 
@@ -59,6 +59,12 @@ public class InDBKnightRepository implements KnightRepository {
     @Override
     public void createKnight(Knight knight) {
         System.out.println("używam bazy danych");
+    }
+
+    @Override
+    public Knight getKnightById(Integer id) {
+        System.out.println("używam bazy danych");
+        return null;
     }
 
 

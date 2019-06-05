@@ -3,6 +3,7 @@ package pl.robertburek.kursspring.domain.repository;
 import pl.robertburek.kursspring.domain.Knight;
 
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * Created by Robert Burek
@@ -13,9 +14,9 @@ public interface KnightRepository {
 
     Collection<Knight> getAllKnights();
 
-    Knight getKnight(String name);
+    Optional<Knight> getKnight(String name);
 
-    void deleteKnight(String name);
+    void deleteKnight(Integer id);
 
     void build();
 
@@ -24,4 +25,6 @@ public interface KnightRepository {
     void setName(String name);
 
     void createKnight(Knight knight);
+
+    Knight getKnightById(Integer id);
 }

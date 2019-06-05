@@ -19,14 +19,17 @@
 <table class="table">
     <thead>
     <tr>
+        <td>Id</td>
         <td>Imie rycerza</td>
-        <td>Wiek</td>
+        <td>Poziom</td>
     </tr>
     </thead>
     <tbody th:each="knight: ${knights}">
     <tr>
+        <td th:text="${knight.id}"></td>
         <td th:text="${knight.name}"></td>
-        <td th:text="${knight.age}"></td>
+        <td th:text="${knight.level}"></td>
+        <td><a th:href="${'/knight?id='+knight.id}">Info o rycerzu</a></td>
     </tr>
     </tbody>
 </table>
