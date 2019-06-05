@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.robertburek.kursspring.components.TimeComponent;
 import pl.robertburek.kursspring.domain.Knight;
+import pl.robertburek.kursspring.domain.PlayerInformation;
 import pl.robertburek.kursspring.services.KnightService;
 
 import javax.websocket.server.PathParam;
@@ -21,6 +23,12 @@ import java.util.List;
 public class KnightController {
 
     @Autowired
+    TimeComponent timeComponent;
+
+    @Autowired
+    PlayerInformation playerInformation;
+
+    @Autowired
     KnightService service;
 
     @RequestMapping("/knights")  //defaultowo metoda przesyłudanych z formularza jest ustawiona na GET
@@ -28,6 +36,8 @@ public class KnightController {
         List<Knight> allKnights = service.getAllKnights();
         model.addAttribute("knights", allKnights);
         model.addAttribute("powitanie", "Witaj Robercie w WEB SPRINGU");
+        model.addAttribute("timecomponent", timeComponent);
+        model.addAttribute("playerinformation", playerInformation);
         return "knights";
     }
 
@@ -35,12 +45,16 @@ public class KnightController {
     public String getKnight(@RequestParam("id") Integer id, Model model){
         Knight knight = service.getKnight(id);
         model.addAttribute("knight", knight);
+        model.addAttribute("timecomponent", timeComponent);
+        model.addAttribute("playerinformation", playerInformation);
         return "knight";
     }
 
     @RequestMapping("/newknight")
     public String createKnight(Model model) {
         model.addAttribute("knight", new Knight());
+        model.addAttribute("timecomponent", timeComponent);
+        model.addAttribute("playerinformation", playerInformation);
         return "knightform";
     }
 
