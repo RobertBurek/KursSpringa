@@ -1,5 +1,9 @@
 package pl.robertburek.kursspring.domain;
 
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 /**
@@ -9,8 +13,15 @@ import java.util.Objects;
 public class Knight {
 
     private int id;
+
+    @NotNull
+    @Size(min = 2, max = 40, message = "Imie rycerza musi mieć od 2 do 40 znaków")
     private String name;
+
+    @NotNull
+    @Range(min = 18, max = 60,message = "Wiek rycerza musi być od 18 do 60 znaków")
     private int age;
+
     private int level;
 
     private Quest quest;
@@ -52,9 +63,9 @@ public class Knight {
 
     @Override
     public String toString() {
-        return  "id=" + id +
+        return "id=" + id +
                 ", imie='" + name + '\'' +
-                "(" + age +")" +
+                "(" + age + ")" +
                 ", level=" + level +
                 ", quest=" + quest;
     }

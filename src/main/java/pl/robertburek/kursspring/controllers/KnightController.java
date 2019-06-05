@@ -3,6 +3,7 @@ package pl.robertburek.kursspring.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +13,7 @@ import pl.robertburek.kursspring.domain.Knight;
 import pl.robertburek.kursspring.domain.PlayerInformation;
 import pl.robertburek.kursspring.services.KnightService;
 
-import javax.websocket.server.PathParam;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class KnightController {
     }
 
     @RequestMapping("/knight")
-    public String getKnight(@RequestParam("id") Integer id, Model model){
+    public String getKnight(@RequestParam("id") Integer id, Model model) {
         Knight knight = service.getKnight(id);
         model.addAttribute("knight", knight);
         model.addAttribute("timecomponent", timeComponent);
@@ -58,13 +59,21 @@ public class KnightController {
         return "knightform";
     }
 
-    @RequestMapping(value="/knights", method = RequestMethod.POST)  //ustawienie przesyłu dnych z formularza na POST
-    public String saveKnight(Knight knight) {
-        service.saveKnight(knight);
-        return "redirect:/knights";
+    @RequestMapping(value = "/knights", method = RequestMethod.POST)  //ustawienie przesyłu dnych z formularza na POST
+    public String saveKnight(@Valid Knight knight, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("Błędnie wypełniony formularz!!!");
+            bindingResult.getAllErrors().forEach(error -> {
+                System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
+            });
+            return "knightform";
+        } else {
+            service.saveKnight(knight);
+            return "redirect:/knights";
+        }
     }
 
-    @RequestMapping(value="/knight/delete/{id}")  //id przekazane za pomocą danych w URL
+    @RequestMapping(value = "/knight/delete/{id}")  //id przekazane za pomocą danych w URL
     public String deleteKnight(@PathVariable("id") Integer id) {
         service.removeKnight(id);
         return "redirect:/knights";
