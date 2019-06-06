@@ -3,6 +3,7 @@ package pl.robertburek.kursspring.domain.repository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import pl.robertburek.kursspring.domain.Knight;
+import pl.robertburek.kursspring.utils.Ids;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -35,20 +36,10 @@ public class InMemoryKnightRepository implements KnightRepository {
     @Override
     public void createKnight(String name, int age) {
         Knight newKnight = new Knight(name, age);
-        newKnight.setId(getNewId());
-        knights.put(getNewId(), newKnight);
+        newKnight.setId(Ids.generateNewId(knights.keySet()));
+        knights.put(Ids.generateNewId(knights.keySet()), newKnight);
         System.out.println(newKnight);
     }
-
-    private int getNewId() {
-        if (knights.isEmpty()) {
-            return 0;
-        } else {
-            Integer newId = knights.size() - 1;//knights.keySet().stream().max(Integer::max).get();
-            return newId + 1;
-        }
-    }
-
 
     @Override
     public Collection<Knight> getAllKnights() {
@@ -92,7 +83,7 @@ public class InMemoryKnightRepository implements KnightRepository {
 
     @Override
     public void createKnight(Knight knight) {
-        knight.setId(getNewId());
+        knight.setId(Ids.generateNewId(knights.keySet()));
         knight.setLevel(0);
         knights.put(knight.getId(), knight);
     }

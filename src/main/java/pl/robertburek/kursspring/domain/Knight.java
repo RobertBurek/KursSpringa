@@ -19,7 +19,7 @@ public class Knight {
     private String name;
 
     @NotNull
-    @Range(min = 18, max = 60,message = "Wiek rycerza musi być od 18 do 60 znaków")
+    @Range(min = 18, max = 60, message = "Wiek rycerza musi być od 18 do 60 znaków")
     private int age;
 
     private int level;
