@@ -3,11 +3,10 @@ package pl.robertburek.kursspring.domain.repository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 import pl.robertburek.kursspring.domain.Quest;
+import pl.robertburek.kursspring.utils.Ids;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 /**
@@ -19,14 +18,17 @@ public class QuestRepository {
 
     Random rand = new Random();
 
-    List<Quest> questList = new ArrayList<>();
+    Map<Integer, Quest> quests = new HashMap<>();
+
 
     public void createQuest(String description) {
-        questList.add(new Quest(description));
+        int newId = Ids.generateNewId(quests.keySet());
+        Quest quest = new Quest(newId, description);
+        quests.put(newId, quest);
     }
 
     public List<Quest> getAllQuest() {
-        return questList;
+        return new ArrayList<>(quests.values());
     }
 
     @PostConstruct
@@ -35,13 +37,13 @@ public class QuestRepository {
     }
 
     public void deleteQuest(Quest quest) {
-        questList.remove(quest);
+        quests.remove(quest.getId());
     }
 
     @Override
     public String toString() {
         return "Lista zadań {" +
-                "zadanie = " + questList +
+                "zadanie = " + quests +
                 '}';
     }
 
@@ -70,5 +72,13 @@ public class QuestRepository {
         System.out.println("Utworzyłem zadania: \"" + description + "\"");
         createQuest(description);
 
+    }
+
+    public void update(Quest quest) {
+        quests.put(quest.getId(),quest);
+    }
+
+    public Quest getQuest(Integer id) {
+        return quests.get(id);
     }
 }

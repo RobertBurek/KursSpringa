@@ -99,4 +99,9 @@ public class InMemoryKnightRepository implements KnightRepository {
                 "rycerz = " + knights +
                 '}';
     }
+
+    @Override
+    public void updateKnight(int id, Knight knight){
+        knights.put(id,knight);
+    }
 }

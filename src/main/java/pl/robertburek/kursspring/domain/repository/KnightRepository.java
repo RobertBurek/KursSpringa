@@ -1,5 +1,6 @@
 package pl.robertburek.kursspring.domain.repository;
 
+import jdk.jshell.spi.ExecutionControl;
 import pl.robertburek.kursspring.domain.Knight;
 
 import java.util.Collection;
@@ -27,4 +28,8 @@ public interface KnightRepository {
     void createKnight(Knight knight);
 
     Knight getKnightById(Integer id);
+
+    default void updateKnight(int id, Knight knight){
+        System.out.println("Coś defaultowwego w interfejsie.");
+    }
 }
