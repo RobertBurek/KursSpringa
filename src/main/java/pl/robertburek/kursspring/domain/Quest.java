@@ -1,24 +1,38 @@
 package pl.robertburek.kursspring.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 /**
  * Created by Robert Burek
  */
 
+@Entity
+//@Table(name="Zadania")
 public class Quest {
 
+    //mapowanie bezpośrednio na pola
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    //    @Column(name="Opis")
     private String description;
 
     private int reward = 100;
 
+    //    @Transient  //pole nie będzie zapisywane do bazy
     protected int lenghtInSeconds = 15;
 
     private boolean started = false;
     private boolean completed = false;
     protected LocalDateTime startDate;
+
+//    public Quest() {
+//    }
 
     public Quest(int id, String tresc) {
         this.id = id;
@@ -66,9 +80,9 @@ public class Quest {
     }
 
     public boolean isCompleted() {
-        if(this.completed) {
+        if (this.completed) {
             return this.completed;
-        }else {
+        } else {
             LocalDateTime now = LocalDateTime.now();
             LocalDateTime questEndDate = this.startDate.plusSeconds(this.lenghtInSeconds);
             boolean isAfter = now.isAfter(questEndDate);
@@ -79,6 +93,9 @@ public class Quest {
         }
     }
 
+    //    ustawiamy tutaj jak chcemy używać geteróe i seterów do ustawiania danych w tabeli
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
