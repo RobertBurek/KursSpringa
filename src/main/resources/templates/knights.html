@@ -14,8 +14,8 @@
 <body>
 <div class="container">
 
-    Aktualny czas: <span th:text="${timecomponent.time}"></span>
     Posiadane złoto: <span th:text="${playerinformation.gold}"></span>
+    <a th:href="${'/checkQuests'}">Aktualizuj zadania</a>
 
     <p th:text="${powitanie}"/>
     <h1>Rycerze</h1>
