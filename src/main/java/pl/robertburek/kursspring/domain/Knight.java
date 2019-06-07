@@ -2,6 +2,8 @@ package pl.robertburek.kursspring.domain;
 
 import org.hibernate.validator.constraints.Range;
 
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
@@ -10,8 +12,11 @@ import java.util.Objects;
  * Created by Robert Burek
  */
 
+@Entity
 public class Knight {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @NotNull
@@ -24,6 +29,8 @@ public class Knight {
 
     private int level;
 
+//    @Embedded   // dane związane z encją w której się znajduje
+    @OneToOne  //relacja jedendo jednego
     private Quest quest;
 
     public Knight() {
