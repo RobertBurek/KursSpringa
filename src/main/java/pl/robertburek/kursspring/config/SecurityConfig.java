@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import javax.sql.DataSource;
+
 /**
  * Created by Robert Burek
  */
@@ -13,12 +15,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    DataSource dataSource;
+
     @Override
     public void configure(HttpSecurity security) throws Exception {
         security.authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/knights").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/knight").hasAnyRole("ADMIN")
+                .antMatchers("/knights").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/knight").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()//.httpBasic(); //tutaj też działa formularz logowania
                 .formLogin()   //bez tego też jest formularz logowania
@@ -27,9 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void securityUsers(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user1").password("{noop}user1").roles("USER").and()
-                .withUser("Robert").password("{noop}Robert").roles("ADMIN").and()
-                .withUser("InnyUser").password("{noop}InnyUser").roles("USER");
+        auth.jdbcAuthentication()
+                .dataSource(dataSource).usersByUsernameQuery(
+        "SELECT username,password,enabled FROM PLAYER_INFORMATION WHERE username = ?")
+                .authoritiesByUsernameQuery("SELECT username,userrole FROM ROLE WHERE username = ?");
     }
 }

@@ -2,6 +2,7 @@ package pl.robertburek.kursspring.domain.repository;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import pl.robertburek.kursspring.domain.Knight;
 import pl.robertburek.kursspring.utils.Ids;
 
@@ -15,7 +16,6 @@ import java.util.Optional;
 /**
  * Created by Robert Burek
  */
-
 
 @PropertySource("classpath:inMemoryKnightRepository.properties")
 public class InMemoryKnightRepository implements KnightRepository {

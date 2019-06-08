@@ -1,6 +1,7 @@
 package pl.robertburek.kursspring.domain;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.stereotype.Component;
 
 
 import javax.persistence.*;

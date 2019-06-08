@@ -2,7 +2,6 @@ package pl.robertburek.kursspring.domain.repository;
 
 import org.springframework.stereotype.Repository;
 import pl.robertburek.kursspring.domain.PlayerInformation;
-import pl.robertburek.kursspring.domain.Quest;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,9 +17,9 @@ public class PlayerInformationRepository {
     private EntityManager entityManager;
 
     @Transactional
-    public void createPlayerInformation(PlayerInformation playerInformation){
-        PlayerInformation playerInformation1 = new PlayerInformation();
-        entityManager.persist(playerInformation1);
+    public void createPlayerInformation(PlayerInformation playerInformation) {
+        PlayerInformation playerInfo = new PlayerInformation();
+        entityManager.persist(playerInfo);
     }
 
     public PlayerInformation getFirst() {
