@@ -11,13 +11,12 @@ import javax.persistence.Id;
  * Created by Robert Burek
  */
 
-@Component
 @Entity
 //@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class PlayerInformation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private int gold = 0;

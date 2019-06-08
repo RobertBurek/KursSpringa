@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.robertburek.kursspring.components.TimeComponent;
 import pl.robertburek.kursspring.domain.Knight;
 import pl.robertburek.kursspring.domain.PlayerInformation;
+import pl.robertburek.kursspring.domain.repository.PlayerInformationRepository;
 import pl.robertburek.kursspring.services.KnightService;
 
 import javax.validation.Valid;
@@ -27,7 +28,7 @@ public class KnightController {
     TimeComponent timeComponent;
 
     @Autowired
-    PlayerInformation playerInformation;
+    PlayerInformationRepository playerInformationRepository;
 
     @Autowired
     KnightService service;
@@ -35,6 +36,7 @@ public class KnightController {
     @RequestMapping("/knights")  //defaultowo metoda przesyłudanych z formularza jest ustawiona na GET
     public String getKnights(Model model) {
         List<Knight> allKnights = service.getAllKnights();
+        PlayerInformation playerInformation = playerInformationRepository.getFirst();
         model.addAttribute("knights", allKnights);
         model.addAttribute("powitanie", "Witaj Robercie w WEB SPRINGU");
         model.addAttribute("timecomponent", timeComponent);
@@ -45,6 +47,7 @@ public class KnightController {
     @RequestMapping("/knight")
     public String getKnight(@RequestParam("id") Integer id, Model model) {
         Knight knight = service.getKnight(id);
+        PlayerInformation playerInformation = playerInformationRepository.getFirst();
         model.addAttribute("knight", knight);
         model.addAttribute("timecomponent", timeComponent);
         model.addAttribute("playerinformation", playerInformation);
@@ -53,6 +56,7 @@ public class KnightController {
 
     @RequestMapping("/newknight")
     public String createKnight(Model model) {
+        PlayerInformation playerInformation = playerInformationRepository.getFirst();
         model.addAttribute("knight", new Knight());
         model.addAttribute("timecomponent", timeComponent);
         model.addAttribute("playerinformation", playerInformation);
@@ -63,9 +67,9 @@ public class KnightController {
     public String saveKnight(@Valid Knight knight, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             System.out.println("Błędnie wypełniony formularz!!!");
-            bindingResult.getAllErrors().forEach(error -> {
-                System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
-            });
+            bindingResult.getAllErrors().forEach(error ->
+                System.out.println(error.getObjectName() + " " + error.getDefaultMessage())
+            );
             return "knightform";
         } else {
             service.saveKnight(knight);

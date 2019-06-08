@@ -16,7 +16,7 @@ public class Quest {
 
     //mapowanie bezpośrednio na pola
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     //    @Column(name="Opis")
@@ -31,12 +31,21 @@ public class Quest {
     private boolean completed = false;
     protected LocalDateTime startDate;
 
-//    public Quest() {
-//    }
+    public Quest() {
+    }
 
     public Quest(int id, String tresc) {
         this.id = id;
         this.description = tresc;
+    }
+
+    public Quest(String description) {
+        this.description=description;
+    }
+
+    public Quest(String description, int reward) {
+        this.description = description;
+        this.reward = reward;
     }
 
     @Override

@@ -64,10 +64,6 @@ public class InMemoryKnightRepository implements KnightRepository {
     @Override
     @PostConstruct
     public void build() {
-        createKnight("Robert", 49);
-        createKnight("Grzegorz", 48);
-        createKnight("Zbyszko", 52);
-        createKnight("Lancelot", 38);
     }
 
     @Override

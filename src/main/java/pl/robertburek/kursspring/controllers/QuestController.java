@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.robertburek.kursspring.domain.Knight;
 import pl.robertburek.kursspring.domain.PlayerInformation;
 import pl.robertburek.kursspring.domain.Quest;
+import pl.robertburek.kursspring.domain.repository.PlayerInformationRepository;
 import pl.robertburek.kursspring.services.KnightService;
 import pl.robertburek.kursspring.services.QuestService;
 
@@ -28,7 +29,7 @@ public class QuestController {
     QuestService questService;
 
     @Autowired
-    PlayerInformation playerInformation;
+    PlayerInformationRepository playerInformationRepository;
 
     @RequestMapping("/assignquest")
     public String assignQuest(@RequestParam("knightId") Integer id, Model model) {

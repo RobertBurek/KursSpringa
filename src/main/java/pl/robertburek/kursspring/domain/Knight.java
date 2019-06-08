@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Knight {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
@@ -34,12 +34,49 @@ public class Knight {
     private Quest quest;
 
     public Knight() {
+        this.level =1;
     }
 
     public Knight(String name, int age) {
         this.name = name;
         this.age = age;
         this.level = 1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Knight knight = (Knight) o;
+        return age == knight.age;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(age);
+    }
+
+    public void setQuest(Quest quest) {
+        if(quest!=null) {
+            quest.setStarted(true);
+        }
+        this.quest = quest;
+    }
+
+    public Quest getQuest() {
+        return quest;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
@@ -54,44 +91,6 @@ public class Knight {
         this.id = id;
     }
 
-    public int getAge() {
-        return this.age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-//    @Override
-//    public String toString() {
-//        return " imie " + this.name + "(" + this.age + "). Ma za zadanie : " + this.quest;
-//    }
-
-
-    @Override
-    public String toString() {
-        return "id=" + id +
-                ", imie='" + name + '\'' +
-                "(" + age + ")" +
-                ", level=" + level +
-                ", quest=" + quest;
-    }
-
-    public void setQuest(Quest quest) {
-        if(quest!=null) {
-            quest.setStarted(true);
-        }
-        this.quest = quest;
-    }
-
-    public Quest getQuest() {
-        return quest;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
     public int getLevel() {
         return level;
     }
@@ -101,15 +100,11 @@ public class Knight {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Knight knight = (Knight) o;
-        return age == knight.age;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(age);
+    public String toString() {
+        return "id=" + id +
+                ", imie='" + name + '\'' +
+                "(" + age + ")" +
+                ", level=" + level +
+                ", quest=" + quest;
     }
 }

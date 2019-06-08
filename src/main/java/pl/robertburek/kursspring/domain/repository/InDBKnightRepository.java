@@ -2,6 +2,9 @@ package pl.robertburek.kursspring.domain.repository;
 
 import pl.robertburek.kursspring.domain.Knight;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -11,61 +14,63 @@ import java.util.Optional;
  */
 
 public class InDBKnightRepository implements KnightRepository {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
+    @Transactional
     public void createKnight(String name, int age) {
-//        knights.put(name, new Knight(name, age));
-        System.out.println("używam bazy danych");
+        Knight knight = new Knight(name, age);
+        entityManager.persist(knight);
     }
 
     @Override
     public Collection<Knight> getAllKnights() {
-//        return knights.values();
-        System.out.println("używam bazy danych");
-//        throw new NotImplementedException();
-        return null;
+        return entityManager.createQuery("from Knight", Knight.class).getResultList();
     }
 
     @Override
     public Optional<Knight> getKnight(String name) {
-//        return knights.get(name);
-        System.out.println("używam bazy danych");
-//        throw new NotImplementedException();
-        return null;
+        Knight knightByName = entityManager.createQuery("from Knight k where k.name=:name", Knight.class)
+                .setParameter("name", name).getSingleResult();
+        return Optional.ofNullable(knightByName);
     }
 
     @Override
+    @Transactional
     public void deleteKnight(Integer id) {
-        System.out.println("używam bazy danych");
+        Knight knight = entityManager.find(Knight.class, id);
+        entityManager.remove(knight);
     }
 
     @Override
-
     public void build() {
-//        createKnight("Robert", 49);
-//        createKnight("Grzegorz", 48);
-//        createKnight("Zbyszko", 52);
     }
 
     @Override
     public void tearDown() {
-        System.out.println("używam bazy danych");
     }
 
     @Override
     public void setName(String name) {
-        System.out.println("używam bazy danych");
     }
 
     @Override
+    @Transactional
     public void createKnight(Knight knight) {
-        System.out.println("używam bazy danych");
+        entityManager.persist(knight);
     }
 
     @Override
     public Knight getKnightById(Integer id) {
-        System.out.println("używam bazy danych");
-        return null;
+        return entityManager.find(Knight.class, id);
     }
 
+    @Override
+    @Transactional
+    public void updateKnight(int id, Knight knight) {
+        entityManager.merge(knight);
+    }
 
 }
